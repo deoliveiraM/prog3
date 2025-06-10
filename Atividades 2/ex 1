@@ -1,0 +1,66 @@
+<?php
+
+class Livro
+{
+    public function __construct(
+        private string $titulo,
+        private string $autor,
+        private int $anoDePublicacao,
+        private bool $disponivel = true
+    ) {
+        $this->exibirInformacoes();
+    }
+
+    public function getTitulo(): string
+    {
+        return $this->titulo;
+    }
+
+    public function setTitulo(string $titulo): void
+    {
+        $this->titulo = $titulo;
+    }
+
+    public function getAutor(): string
+    {
+        return $this->autor;
+    }
+
+    public function setAutor(string $autor): void
+    {
+        $this->autor = $autor;
+    }
+
+    public function getAnoDePublicacao(): int
+    {
+        return $this->anoDePublicacao;
+    }
+
+    public function setAnoDePublicacao(int $ano): void
+    {
+        $this->anoDePublicacao = $ano;
+    }
+
+    public function isDisponivel(): bool
+    {
+        return $this->disponivel;
+    }
+
+    public function setDisponivel(bool $disponivel): void
+    {
+        $this->disponivel = $disponivel;
+    }
+
+    public function exibirInformacoes(): void
+    {
+        $status = $this->disponivel ? "Disponível" : "Indisponível";
+        echo "Título: " . $this->titulo . "<br>";
+        echo "Autor: " . $this->autor . "<br>";
+        echo "Ano de Publicação: " . $this->anoDePublicacao . "<br>";
+        echo "Status: " . $status . "<br>";
+    }
+}
+
+$livro1 = new Livro("A Revolução dos Bichos", "George Orwell", 1945);
+
+?>

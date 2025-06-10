@@ -1,0 +1,134 @@
+<?php
+
+class Livro
+{
+    private $titulo;
+    private $autor;
+    private $anoDePublicacao;
+    private $disponivel;
+
+    public function __construct($titulo, $autor, $anoDePublicacao)
+    {
+        $this->titulo = $titulo;
+        $this->autor = $autor;
+        $this->anoDePublicacao = $anoDePublicacao;
+        $this->disponivel = true;
+    }
+
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
+
+    public function emprestar(): void
+    {
+        if ($this->disponivel) {
+            $this->disponivel = false;
+            echo "O livro '{$this->titulo}' foi emprestado.\n";
+        } else {
+            echo "O livro '{$this->titulo}' já está indisponível.\n";
+        }
+    }
+
+    public function devolver(): void
+    {
+        if (!$this->disponivel) {
+            $this->disponivel = true;
+            echo "O livro '{$this->titulo}' foi devolvido.\n";
+        } else {
+            echo "O livro '{$this->titulo}' já se encontra disponível.\n";
+        }
+    }
+
+    public function estaDisponivel(): string
+    {
+        return $this->disponivel
+            ? "Sim, o livro '{$this->titulo}' está disponível."
+            : "Não, o livro '{$this->titulo}' está emprestado.";
+    }
+
+    public function exibirInformacoes(): void
+    {
+        $status = $this->disponivel ? "Disponível" : "Emprestado";
+        echo "--- Informações do Livro ---\n";
+        echo "Título: {$this->titulo}\n";
+        echo "Status: {$status}\n";
+        echo "-----------------------------\n\n";
+    }
+}
+
+class Leitor
+{
+    private $nome;
+    private $email;
+    private $telefone;
+
+    public function __construct(string $nome, string $email, string $telefone)
+    {
+        $this->nome = $nome;
+        $this->email = $email;
+        $this->telefone = $telefone;
+    }
+
+    public function getNome(): string
+    {
+        return $this->nome;
+    }
+
+    public function setNome(string $nome): void
+    {
+        $this->nome = $nome;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getTelefone(): string
+    {
+        return $this->telefone;
+    }
+
+    public function setTelefone(string $telefone): void
+    {
+        $this->telefone = $telefone;
+    }
+
+    public function exibirLeitor(): void
+    {
+        echo "--- Dados do Leitor ---\n";
+        echo "Nome: " . $this->nome . "\n";
+        echo "Email: " . $this->email . "\n";
+        echo "Telefone: " . $this->telefone . "\n";
+        echo "--------------------------\n\n";
+    }
+}
+
+echo "Sistema da Biblioteca\n";
+
+// 1. Criamos instâncias de ambas as classes
+$leitor1 = new Leitor("Ana Maria", "ana.m@email.com", "(51) 98877-6655");
+$livro1 = new Livro("O Quinze", "Rachel de Queiroz", 1930);
+
+// 2. Exibimos os dados iniciais de cada objeto
+echo "Itens Cadastrados:\n";
+$leitor1->exibirLeitor();
+$livro1->exibirInformacoes();
+
+// 3. Simulamos uma operação que envolve um dos objetos
+echo "Simulando uma Operação:\n";
+echo "Realizando o empréstimo do livro para a leitora {$leitor1->getNome()}...\n";
+$livro1->emprestar();
+echo "\n";
+
+// 4. Exibimos o estado final do livro
+echo "Novo estado do livro:\n";
+$livro1->exibirInformacoes();
+
+?>

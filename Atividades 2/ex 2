@@ -1,0 +1,81 @@
+<?php
+
+class Livro
+{
+    private string $titulo;
+    private string $autor;
+    private int $anoDePublicacao;
+    private bool $disponivel;
+
+    public function __construct(string $titulo, string $autor, int $anoDePublicacao, bool $disponivel = true)
+    {
+        $this->titulo = $titulo;
+        $this->autor = $autor;
+        $this->anoDePublicacao = $anoDePublicacao;
+        $this->disponivel = $disponivel;
+    }
+
+    public function emprestar(): void
+    {
+        if ($this->disponivel) {
+            $this->disponivel = false;
+            echo "O livro '{$this->titulo}' foi emprestado.\n";
+        } else {
+            echo "O livro '{$this->titulo}' já está indisponível.\n";
+        }
+    }
+
+    public function devolver(): void
+    {
+        if (!$this->disponivel) {
+            $this->disponivel = true;
+            echo "O livro '{$this->titulo}' foi devolvido.\n";
+        } else {
+            echo "O livro '{$this->titulo}' já se encontra disponível.\n";
+        }
+    }
+
+    public function estaDisponivel(): string
+    {
+        return $this->disponivel
+            ? "Sim, o livro '{$this->titulo}' está disponível."
+            : "Não, o livro '{$this->titulo}' está emprestado.";
+    }
+
+    public function exibirInformacoes(): void
+    {
+        $status = $this->disponivel ? "Disponível" : "Emprestado";
+        echo "----------------------------\n";
+        echo "Título: {$this->titulo}\n";
+        echo "Status: {$status}\n";
+        echo "----------------------------\n";
+    }
+
+    public function getTitulo(): string
+    {
+        return $this->titulo;
+    }
+}
+
+// --- Cenário de Uso ---
+
+echo "Controle de Empréstimos\n";
+
+// Criação dos dois objetos Livro
+$livro1 = new Livro("Dom Casmurro", "Machado de Assis", 1899);
+$livro2 = new Livro("A Revolução dos Bichos", "George Orwell", 1945);
+
+// Simulação com o primeiro livro (empréstimo)
+echo "\nSimulação 1: Emprestar '{$livro1->getTitulo()}'\n";
+echo $livro1->estaDisponivel() . "\n";
+$livro1->emprestar();
+echo $livro1->estaDisponivel() . "\n";
+
+// Simulação com o segundo livro (empréstimo e devolução)
+echo "\nSimulação 2: Ciclo completo com '{$livro2->getTitulo()}'\n";
+$livro2->exibirInformacoes();
+$livro2->emprestar();
+$livro2->devolver();
+$livro2->exibirInformacoes();
+
+?>
