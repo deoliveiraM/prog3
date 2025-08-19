@@ -90,7 +90,7 @@ class Administrativo extends Assistente {
 
 $primeiro_funcionario->addAumento(500);
 $primeiro_funcionario->exibeDados();
-$assistente = new Assistente("Maria", 2500);
+$assistente = new Assistente("João", 2500);
 $assistente->setMatricula("12345");
 $assistente->addAumento(300);
 $assistente->exibeDados();
@@ -98,7 +98,7 @@ $tecnico = new Tecnico("Carlos", 4000, 600);
 $tecnico->setMatricula("67890");
 $tecnico->addAumento(700);
 $tecnico->exibeDados();
-$administrativo = new Administrativo("Ana", 3500, "Noite", 200);
+$administrativo = new Administrativo("Cleber", 3500, "Noite", 200);
 $administrativo->setMatricula("54321");
 $administrativo->addAumento(400);
 $administrativo->exibeDados();
@@ -106,6 +106,7 @@ echo "Ganho Anual do Funcionário: " . $primeiro_funcionario->ganhoAnual() . "\n
 echo "Ganho Anual do Assistente: " . $assistente->ganhoAnual() . "\n";
 echo "Ganho Anual do Técnico: " . $tecnico->ganhoAnual() . "\n";
 echo "Ganho Anual do Administrativo: " . $administrativo->ganhoAnual() . "\n";
+
 
 
 ?>
